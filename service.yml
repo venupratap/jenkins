@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jenkins
+spec:
+  type: LoadBalancer
+  selector:
+    app: jenkins
+  ports:
+    - name: http
+      protocol: TCP
+      # ELB's port
+      port: 8080
