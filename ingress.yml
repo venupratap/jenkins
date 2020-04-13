@@ -2,13 +2,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: jenkins.ingress
+  name: jenkins-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: nginxmydomain.tk
-    http:
+  - http:
       paths:
       - path: /jenkins
         backend:
