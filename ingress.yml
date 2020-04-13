@@ -1,0 +1,16 @@
+---
+apiVersion: apps/v1
+kind: Ingress
+metadata:
+  name: jenkins.ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: nginxmydomain.tk
+    http:
+      paths:
+      - path: /jenkins
+        backend:
+          serviceName: jenkins
+          servicePort: 8080
