@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: nginx
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: nginx.nginxmydomain.tk.
+    external-dns.alpha.kubernetes.io/hostname: nginx.nginxmydomain.tk
 spec:
   type: LoadBalancer
   ports:
@@ -31,4 +31,3 @@ spec:
         ports:
         - containerPort: 80
           name: http
-
