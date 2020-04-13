@@ -1,37 +1,19 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: jenkins-master
+  name: jenkins-master-svc
+  labels:
+    app: jenkins-master
 spec:
-  replicas: 2
-  template:
-    metadata:
-      labels:
-        app: jenkins-master
-    spec:
-      containers:
-       - name: jenkins-leader
-         image: jenkins
-         volumeMounts:
-          - name: jenkins-home
-            mountPath: /var/jenkins_home
-          - name: docker-sock-volume
-            mountPath: /var/run/docker.sock
-         resources:
-           requests:
-             memory: "1024Mi"
-             cpu: "0.5"
-           limits: 
-             memory: "1024Mi"
-             cpu: "0.5"
-         ports:
-           - name: http-port
-             containerPort: 8080
-           - name: jnlp-port
-             containerPort: 50000
-      volumes:
-       - name: jenkins-home
-          emptyDir: {}
-       - name: docker-sock-volume
-         hostPath:
-           path: /var/run/docker.sock
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  - port: 50000
+    targetPort: 50000
+    protocol: TCP
+    name: slave
+  selector:
+    app: jenkins-master
