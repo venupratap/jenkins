@@ -15,4 +15,4 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: jenkins:latest
+          image: jenkins/jenkins
